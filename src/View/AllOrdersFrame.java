@@ -78,19 +78,21 @@ public class AllOrdersFrame extends JFrame {
 		JButton btnDetail = new JButton("Detail");
 		btnDetail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				Order selectedOrder = SQLManager.selectOrderAtIndex(Integer.parseInt((String)comboBox.getSelectedItem()));
-				
+
 				ArrayList<OrderItem> orderedItems = SQLManager.selectAllItemsInMenuOnOrderWithIndex(selectedOrder.id);
-				Client client = SQLManager.selectOrderAtIndex(orderedItems.get(0).id).client;
+//				Client client = SQLManager.selectOrderAtIndex(orderedItems.get(0).id).client;
+				Client client = SQLManager.selectClientAtIndex(selectedOrder.client.id);
+
+				System.out.println("\nClient: " + client.name);
+				System.out.println(" phone: " + client.phone);
+				System.out.println("Address: " + client.address + "\nAddress Reference: " + client.addressReference);
+				System.out.println("-- Ordered Items --");
 				
 				for (int i = 0; i < orderedItems.size() ; i++ ) {
 					OrderItem orderedItem = orderedItems.get(i);
-					System.out.println("\nClient: " + client.name);
-					System.out.println(" phone: " + client.phone);
-					System.out.println("Address: " + client.address + "\nAddress Reference: " + client.addressReference);
-					System.out.println("-- Ordered Items --");
-					System.out.println("Item Name: "+ orderedItem.menuItem.name + "\n Qnt: " + orderedItem.quantity + "\n\n");
+					System.out.println("Item Name: "+ orderedItem.menuItem.name + "\n Qnt: " + orderedItem.quantity + "\n");
 				}
 			}
 		});

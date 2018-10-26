@@ -134,7 +134,10 @@ public class AddOrderFrame extends JFrame {
 					int menuItemID = SQLManager.selectItemsInMenuWithName(table.getValueAt(i, 0).toString()).id;
 					SQLManager.insertNewOrderItem(id, quantity, menuItemID);
 				}
-//				
+				
+				setVisible(false);
+				dispose();
+				
 			}
 		});
 		btnSave.setBounds(315, 497, 89, 23);
